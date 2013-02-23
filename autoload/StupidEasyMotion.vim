@@ -1,17 +1,17 @@
-" EasyMotion - Vim motions on speed!
+" StupidEasyMotion - Vim motions on speed!
 "
 " Author: Kim Silkebækken <kim.silkebaekken+vim@gmail.com>
 " Source repository: https://github.com/Lokaltog/vim-easymotion
 
 " Default configuration functions {{{
-	function! EasyMotion#InitOptions(options) " {{{
+	function! StupidEasyMotion#InitOptions(options) " {{{
 		for [key, value] in items(a:options)
-			if ! exists('g:EasyMotion_' . key)
-				exec 'let g:EasyMotion_' . key . ' = ' . string(value)
+			if ! exists('g:StupidEasyMotion_' . key)
+				exec 'let g:StupidEasyMotion_' . key . ' = ' . string(value)
 			endif
 		endfor
 	endfunction " }}}
-	function! EasyMotion#InitHL(group, colors) " {{{
+	function! StupidEasyMotion#InitHL(group, colors) " {{{
 		let group_default = a:group . 'Default'
 
 		" Prepare highlighting variables
@@ -40,32 +40,32 @@
 		" No colors are defined for this group, link to defaults
 		execute printf('hi default link %s %s', a:group, group_default)
 	endfunction " }}}
-	function! EasyMotion#InitMappings(motions) "{{{
+	function! StupidEasyMotion#InitMappings(motions) "{{{
 		for motion in keys(a:motions)
-			call EasyMotion#InitOptions({ 'mapping_' . motion : g:EasyMotion_leader_key . motion })
+			call StupidEasyMotion#InitOptions({ 'mapping_' . motion : g:StupidEasyMotion_leader_key . motion })
 		endfor
 
-		if g:EasyMotion_do_mapping
+		if g:StupidEasyMotion_do_mapping
 			for [motion, fn] in items(a:motions)
-				if empty(g:EasyMotion_mapping_{motion})
+				if empty(g:StupidEasyMotion_mapping_{motion})
 					continue
 				endif
 
-				silent exec 'nnoremap <silent> ' . g:EasyMotion_mapping_{motion} . '      :call EasyMotion#' . fn.name . '(0, ' . fn.dir . ')<CR>'
-				silent exec 'onoremap <silent> ' . g:EasyMotion_mapping_{motion} . '      :call EasyMotion#' . fn.name . '(0, ' . fn.dir . ')<CR>'
-				silent exec 'vnoremap <silent> ' . g:EasyMotion_mapping_{motion} . ' :<C-U>call EasyMotion#' . fn.name . '(1, ' . fn.dir . ')<CR>'
+				silent exec 'nnoremap <silent> ' . g:StupidEasyMotion_mapping_{motion} . '      :call StupidEasyMotion#' . fn.name . '(0, ' . fn.dir . ')<CR>'
+				silent exec 'onoremap <silent> ' . g:StupidEasyMotion_mapping_{motion} . '      :call StupidEasyMotion#' . fn.name . '(0, ' . fn.dir . ')<CR>'
+				silent exec 'vnoremap <silent> ' . g:StupidEasyMotion_mapping_{motion} . ' :<C-U>call StupidEasyMotion#' . fn.name . '(1, ' . fn.dir . ')<CR>'
 			endfor
 		endif
 	endfunction "}}}
 " }}}
 " Motion functions {{{
-	function! EasyMotion#WB(visualmode, direction) " {{{
-		call s:EasyMotion('\(\<.\|^$\)', a:direction, a:visualmode ? visualmode() : '', '')
+	function! StupidEasyMotion#WB(visualmode, direction) " {{{
+		call s:StupidEasyMotion('\(\<.\|^$\)', a:direction, a:visualmode ? visualmode() : '', '')
 	endfunction " }}}
-	function! EasyMotion#WBW(visualmode, direction) " {{{
-		call s:EasyMotion('\(\(^\|\s\)\@<=\S\|^$\)', a:direction, a:visualmode ? visualmode() : '', '')
+	function! StupidEasyMotion#WBW(visualmode, direction) " {{{
+		call s:StupidEasyMotion('\(\(^\|\s\)\@<=\S\|^$\)', a:direction, a:visualmode ? visualmode() : '', '')
 	endfunction " }}}
-	function! EasyMotion#F(visualmode, direction) " {{{
+	function! StupidEasyMotion#F(visualmode, direction) " {{{
 		let char = s:GetSearchChar(a:visualmode)
 
 		if empty(char)
@@ -74,12 +74,12 @@
 
 		let re = '\C' . escape(char, '.$^~')
 
-		call s:EasyMotion(re, a:direction, a:visualmode ? visualmode() : '', mode(1))
+		call s:StupidEasyMotion(re, a:direction, a:visualmode ? visualmode() : '', mode(1))
 	endfunction " }}}
 " }}}
 " Helper functions {{{
 	function! s:Message(message) " {{{
-		echo 'EasyMotion: ' . a:message
+		echo 'StupidEasyMotion: ' . a:message
 	endfunction " }}}
 	function! s:Prompt(message) " {{{
 		echohl Question
@@ -371,7 +371,7 @@
 			let lines_items = items(lines)
 		" }}}
 		" Highlight targets {{{
-			let target_hl_id = matchadd(g:EasyMotion_hl_group_target, join(hl_coords, '\|'), 1)
+			let target_hl_id = matchadd(g:StupidEasyMotion_hl_group_target, join(hl_coords, '\|'), 1)
 		" }}}
 
 		try
@@ -419,7 +419,7 @@
 			return s:PromptUser(target)
 		endif
 	endfunction "}}}
-	function! s:EasyMotion(regexp, direction, visualmode, mode) " {{{
+	function! s:StupidEasyMotion(regexp, direction, visualmode, mode) " {{{
 		let orig_pos = [line('.'), col('.')]
 		let targets = []
 
@@ -459,8 +459,8 @@
 				endif
 			" }}}
 
-			let GroupingFn = function('s:GroupingAlgorithm' . s:grouping_algorithms[g:EasyMotion_grouping])
-			let groups = GroupingFn(targets, split(g:EasyMotion_keys, '\zs'))
+			let GroupingFn = function('s:GroupingAlgorithm' . s:grouping_algorithms[g:StupidEasyMotion_grouping])
+			let groups = GroupingFn(targets, split(g:StupidEasyMotion_keys, '\zs'))
 
 			" Prompt user for target group/character
 			let coords = s:PromptUser(groups)
@@ -512,7 +512,7 @@
 				call s:VarReset('&virtualedit')
 			" }}}
 			" Remove shading {{{
-				if g:EasyMotion_do_shade && exists('shade_hl_id')
+				if g:StupidEasyMotion_do_shade && exists('shade_hl_id')
 					call matchdelete(shade_hl_id)
 				endif
 			" }}}
