@@ -1,26 +1,26 @@
-" EasyMotion - Vim motions on speed!
+" StupidEasyMotion - Vim motions on speed!
 "
 " Author: Kim Silkebækken <kim.silkebaekken+vim@gmail.com>
-" Source repository: https://github.com/Lokaltog/vim-easymotion
+" Source repository: https://github.com/joequery/Stupid-EasyMotion
 
 " Script initialization {{{
-	if exists('g:EasyMotion_loaded') || &compatible || version < 702
+	if exists('g:StupidEasyMotion_loaded') || &compatible || version < 702
 		finish
 	endif
 
-	let g:EasyMotion_loaded = 1
+	let g:StupidEasyMotion_loaded = 1
 " }}}
 " Default configuration {{{
 	" Default options {{{
-		call EasyMotion#InitOptions({
+		call StupidEasyMotion#InitOptions({
 		\   'leader_key'      : '<Leader><Leader>'
 		\ , 'keys'            : 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 		\ , 'do_shade'        : 1
 		\ , 'do_mapping'      : 1
 		\ , 'grouping'        : 1
 		\
-		\ , 'hl_group_target' : 'EasyMotionTarget'
-		\ , 'hl_group_shade'  : 'EasyMotionShade'
+		\ , 'hl_group_target' : 'StupidEasyMotionTarget'
+		\ , 'hl_group_shade'  : 'StupidEasyMotionShade'
 		\ })
 	" }}}
 	" Default highlighting {{{
@@ -36,20 +36,20 @@
 		\ , 'cterm'   : ['NONE', 'grey'    , 'NONE']
 		\ }
 
-		call EasyMotion#InitHL(g:EasyMotion_hl_group_target, s:target_hl_defaults)
-		call EasyMotion#InitHL(g:EasyMotion_hl_group_shade,  s:shade_hl_defaults)
+		call StupidEasyMotion#InitHL(g:StupidEasyMotion_hl_group_target, s:target_hl_defaults)
+		call StupidEasyMotion#InitHL(g:StupidEasyMotion_hl_group_shade,  s:shade_hl_defaults)
 
 		" Reset highlighting after loading a new color scheme {{{
-			augroup EasyMotionInitHL
+			augroup StupidEasyMotionInitHL
 				autocmd!
 
-				autocmd ColorScheme * call EasyMotion#InitHL(g:EasyMotion_hl_group_target, s:target_hl_defaults)
-				autocmd ColorScheme * call EasyMotion#InitHL(g:EasyMotion_hl_group_shade,  s:shade_hl_defaults)
+				autocmd ColorScheme * call StupidEasyMotion#InitHL(g:StupidEasyMotion_hl_group_target, s:target_hl_defaults)
+				autocmd ColorScheme * call StupidEasyMotion#InitHL(g:StupidEasyMotion_hl_group_shade,  s:shade_hl_defaults)
 			augroup end
 		" }}}
 	" }}}
 	" Default key mapping {{{
-		call EasyMotion#InitMappings({
+		call StupidEasyMotion#InitMappings({
 		\   'f' : { 'name': 'F'  , 'dir': 0 }
 		\ , 'w' : { 'name': 'WB' , 'dir': 0 }
 		\ , 'W' : { 'name': 'WBW', 'dir': 0 }
