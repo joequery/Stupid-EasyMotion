@@ -80,7 +80,7 @@ to
 
 	" Default key mapping {{{
 		call StupidEasyMotion#InitMappings({
-		    'w' : { 'name': 'WB' , 'dir': 0 }
+		\   'w' : { 'name': 'WB' , 'dir': 0 }
 		\ , 'W' : { 'name': 'WBW', 'dir': 0 }
 		\ })
 	" }}}
