@@ -56,6 +56,36 @@ If you don't like leader based commands, you can remap in your `~/.vimrc` via
 I chose Ctrl-o and Ctrl-e because I never use those commands, but you can
 change it to whatever.
 
+Can I use Stupid EasyMotion with normal EasyMotion?
+---------------------------------------------------
+
+Yes! If you have both EasyMotion and Stupid EasyMotion installed, Stupid
+EasyMotion will use the w, W, and f commands, but all other EasyMotion commands
+will be executed by the normal EasyMotion plugin.
+
+Additionally, if Stupid EasyMotion overrides an EasyMotion command that you'd
+rather not have overridden, you can simply adjust the Default key mapping
+section of the `plugin/StupidEasyMotion.vim` file. For example, to free up the
+`f` mapping, change
+
+	" Default key mapping {{{
+		call StupidEasyMotion#InitMappings({
+		\   'f' : { 'name': 'F'  , 'dir': 0 }
+		\ , 'w' : { 'name': 'WB' , 'dir': 0 }
+		\ , 'W' : { 'name': 'WBW', 'dir': 0 }
+		\ })
+	" }}}
+
+to 
+
+	" Default key mapping {{{
+		call StupidEasyMotion#InitMappings({
+		    'w' : { 'name': 'WB' , 'dir': 0 }
+		\ , 'W' : { 'name': 'WBW', 'dir': 0 }
+		\ })
+	" }}}
+
+
 Credit
 ------
 
