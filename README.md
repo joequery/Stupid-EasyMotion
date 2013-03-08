@@ -4,6 +4,13 @@ Stupid EasyMotion
 Stupid EasyMotion is a fork of the popular [EasyMotion][0] plugin that only
 applies the target search to the current line.
 
+Screencast
+----------
+
+This screencast covers how to install and use Stupid-EasyMotion
+
+[![Screencast](https://s3.amazonaws.com/regexmisc/stupideasymotion.png)](http://www.youtube.com/watch?v=oMnK_llHoK8)
+
 Why?
 ----
 
