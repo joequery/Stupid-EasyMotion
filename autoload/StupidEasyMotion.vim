@@ -437,6 +437,18 @@
 				let search_stopline = line(".")
 				normal ^
 
+				" Handle the case where the pattern matches the first character
+				" of the line. We have to handle this case specially because
+				" allowing searchpos() to match the current character would
+				" cause an infinite loop (since it would continue to match under
+				" the cursor forever)
+				" The 'c' flag lets searchpos() match under the cursor.
+				let pos = searchpos(a:regexp, search_direction.'c', search_stopline)
+				if pos == [line('.'), col('.')]
+					call add(targets, pos)
+				endif
+
+
 				while 1
 					let pos = searchpos(a:regexp, search_direction, search_stopline)
 
